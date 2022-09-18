@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TatagReadMapper">
+
+    <resultMap type="Tatag" id="TatagResult">
+        <result property="tagid"    column="tagid"    />
+        <result property="tagname"    column="tagname"    />
+        <result property="taggroupid"    column="taggroupid"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="effective"    column="effective"    />
+        <result property="createuser"    column="createuser"    />
+        <result property="destory"    column="destory"    />
+        <result property="updatetime"    column="updatetime"    />
+    </resultMap>
+
+    <sql id="selectTatagVo">
+        select tagid, tagname, taggroupid, createtime, effective, createuser, destory, updatetime from tatag
+    </sql>
+
+    <select id="selectTatagList" parameterType="Tatag" resultMap="TatagResult">
+        <include refid="selectTatagVo"/>
+        <where>
+            <if test="tagname != null  and tagname != ''"> and tagname like concat(concat('%', #{tagname}), '%')</if>
+            <if test="taggroupid != null  and taggroupid != ''"> and taggroupid = #{taggroupid}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="effective != null  and effective != ''"> and effective = #{effective}</if>
+            <if test="createuser != null  and createuser != ''"> and createuser = #{createuser}</if>
+            <if test="destory != null  and destory != ''"> and destory = #{destory}</if>
+            <if test="updatetime != null "> and updatetime = #{updatetime}</if>
+        </where>
+    </select>
+
+    <select id="selectTatagByTagid" parameterType="String" resultMap="TatagResult">
+        <include refid="selectTatagVo"/>
+        where tagid = #{tagid}
+    </select>
+</mapper>

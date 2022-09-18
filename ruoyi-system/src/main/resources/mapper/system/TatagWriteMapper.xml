@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TatagWriteMapper">
+
+    <insert id="insertTatag" parameterType="Tatag">
+        <selectKey keyProperty="tagid" resultType="long" order="BEFORE">
+            SELECT seq_tatag.NEXTVAL as tagid FROM DUAL
+        </selectKey>
+        insert into tatag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagid != null">tagid,</if>
+            <if test="tagname != null">tagname,</if>
+            <if test="taggroupid != null">taggroupid,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="effective != null and effective != ''">effective,</if>
+            <if test="createuser != null and createuser != ''">createuser,</if>
+            <if test="destory != null and destory != ''">destory,</if>
+            <if test="updatetime != null">updatetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tagid != null">#{tagid},</if>
+            <if test="tagname != null">#{tagname},</if>
+            <if test="taggroupid != null">#{taggroupid},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="effective != null and effective != ''">#{effective},</if>
+            <if test="createuser != null and createuser != ''">#{createuser},</if>
+            <if test="destory != null and destory != ''">#{destory},</if>
+            <if test="updatetime != null">#{updatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTatag" parameterType="Tatag">
+        update tatag
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tagname != null">tagname = #{tagname},</if>
+            <if test="taggroupid != null">taggroupid = #{taggroupid},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="effective != null and effective != ''">effective = #{effective},</if>
+            <if test="createuser != null and createuser != ''">createuser = #{createuser},</if>
+            <if test="destory != null and destory != ''">destory = #{destory},</if>
+            <if test="updatetime != null">updatetime = #{updatetime},</if>
+        </trim>
+        where tagid = #{tagid}
+    </update>
+
+    <delete id="deleteTatagByTagid" parameterType="String">
+        delete from tatag where tagid = #{tagid}
+    </delete>
+
+    <delete id="deleteTatagByTagids" parameterType="String">
+        delete from tatag where tagid in
+        <foreach item="tagid" collection="array" open="(" separator="," close=")">
+            #{tagid}
+        </foreach>
+    </delete>
+</mapper>
