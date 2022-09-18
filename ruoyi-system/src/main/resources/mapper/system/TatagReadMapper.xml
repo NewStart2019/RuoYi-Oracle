@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.TatagReadMapper">
 
-    <resultMap type="Tatag" id="TatagResult">
+    <resultMap type="com.ruoyi.system.domain.Tatag" id="TatagResult">
         <result property="tagid"    column="tagid"    />
         <result property="tagname"    column="tagname"    />
         <result property="taggroupid"    column="taggroupid"    />
-        <result property="createtime"    column="createtime"    />
+        <result property="createTime"    column="createtime"    />
         <result property="effective"    column="effective"    />
         <result property="createuser"    column="createuser"    />
         <result property="destory"    column="destory"    />
-        <result property="updatetime"    column="updatetime"    />
+        <result property="updateTime"    column="updatetime"    />
     </resultMap>
 
     <sql id="selectTatagVo">
         select tagid, tagname, taggroupid, createtime, effective, createuser, destory, updatetime from tatag
     </sql>
 
-    <select id="selectTatagList" parameterType="Tatag" resultMap="TatagResult">
+    <select id="selectTatagList" parameterType="com.ruoyi.system.domain.Tatag" resultMap="TatagResult">
         <include refid="selectTatagVo"/>
         <where>
             <if test="tagname != null  and tagname != ''"> and tagname like concat(concat('%', #{tagname}), '%')</if>

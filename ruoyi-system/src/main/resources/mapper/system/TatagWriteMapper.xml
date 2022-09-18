@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.TatagWriteMapper">
 
-    <insert id="insertTatag" parameterType="Tatag">
+    <insert id="insertTatag" parameterType="com.ruoyi.system.domain.Tatag">
         <selectKey keyProperty="tagid" resultType="long" order="BEFORE">
             SELECT seq_tatag.NEXTVAL as tagid FROM DUAL
         </selectKey>
@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createuser != null and createuser != ''">createuser,</if>
             <if test="destory != null and destory != ''">destory,</if>
             <if test="updatetime != null">updatetime,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="tagid != null">#{tagid},</if>
             <if test="tagname != null">#{tagname},</if>
@@ -28,10 +28,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createuser != null and createuser != ''">#{createuser},</if>
             <if test="destory != null and destory != ''">#{destory},</if>
             <if test="updatetime != null">#{updatetime},</if>
-         </trim>
+        </trim>
     </insert>
 
-    <update id="updateTatag" parameterType="Tatag">
+    <update id="updateTatag" parameterType="com.ruoyi.system.domain.Tatag">
         update tatag
         <trim prefix="SET" suffixOverrides=",">
             <if test="tagname != null">tagname = #{tagname},</if>

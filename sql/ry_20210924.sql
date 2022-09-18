@@ -1077,6 +1077,34 @@ comment on column gen_table_column.update_by         is '更新者';
 comment on column gen_table_column.update_time       is '更新时间';
 
 
+create sequence seq_tatag
+ increment by 1
+ start with 1
+ nomaxvalue
+ nominvalue
+ cache 20;
+
+CREATE TABLE tatag (
+	tagid NUMBER(20) DEFAULT "seq_tatag".nextval,
+	tagname VARCHAR2(255),
+	taggroupid VARCHAR2 (36),
+	createtime DATE NOT NULL,
+	effective VARCHAR2 (1) NOT NULL,
+	createuser VARCHAR2 (36) NOT NULL,
+	destory VARCHAR2 (1) NOT NULL,
+	updatetime DATE NOT NULL,
+	constraint PK_tatag primary key (tagid)
+);
+COMMENT ON TABLE TATAG IS '标签表';
+COMMENT ON COLUMN TATAG.TAGID IS '标签id';
+COMMENT ON COLUMN TATAG.TAGNAME IS '标签名';
+COMMENT ON COLUMN TATAG.TAGGROUPID IS '标签组id';
+COMMENT ON COLUMN TATAG.CREATETIME IS '创建时间';
+COMMENT ON COLUMN TATAG.EFFECTIVE IS '有效标识';
+COMMENT ON COLUMN TATAG.CREATEUSER IS '创建人';
+COMMENT ON COLUMN TATAG.DESTORY IS '销毁标识';
+COMMENT ON COLUMN TATAG.UPDATETIME IS '更新时间';
+
 -- ----------------------------
 -- 函数 ，代替mysql的find_in_set
 -- 例如： select * from sys_dept where FIND_IN_SET (101,ancestors) <> 0

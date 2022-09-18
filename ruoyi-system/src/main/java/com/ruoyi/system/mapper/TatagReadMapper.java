@@ -9,7 +9,7 @@ import com.ruoyi.system.domain.Tatag;
  * @author ruoyi
  * @date 2022-09-18
  */
-public interface TatagMapper
+public interface TatagReadMapper
 {
     /**
      * 查询标签
